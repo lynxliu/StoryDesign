@@ -1,0 +1,50 @@
+﻿<UserControl
+    x:Class="StoryDesign.View.ExpressView.ExpressView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StoryDesign.View.ExpressView"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerikChart="using:Telerik.UI.Xaml.Controls.Chart"
+    xmlns:telerik="using:Telerik.UI.Xaml.Controls.Input"
+    xmlns:localview="using:StoryDesign.View.ExpressView"
+    mc:Ignorable="d"
+    d:DesignHeight="500"
+    d:DesignWidth="1080" >
+    <Grid PointerPressed="Grid_PointerPressed" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+            <TextBlock Text="{Binding Name,Mode=TwoWay}" Margin="3" MinWidth="50" VerticalAlignment="Center"></TextBlock>
+            <TextBlock VerticalAlignment="Center" Margin="5">时长(Spend):</TextBlock>
+            <TextBlock Margin="5" VerticalAlignment="Center" Text="{Binding SpendTime}"/>
+
+
+            <TextBlock VerticalAlignment="Center" Margin="5">图高(Height):</TextBlock>
+            <telerik:RadNumericBox VerticalAlignment="Center" Margin="5" Maximum="5000" 
+                                   Value="{Binding ViewWidth,Mode=TwoWay}">
+                
+            </telerik:RadNumericBox>
+            <CheckBox Grid.Row="1"  Content="显示剧集(Show Episode)"
+                      Margin="5" IsChecked="{Binding IsShowEpisode,Mode=TwoWay}"></CheckBox>
+
+            <CommandBar ClosedDisplayMode="Compact" Margin="5">
+                <AppBarButton Icon="Refresh" Command="{Binding RefreshCommand}" ToolTipService.ToolTip="刷新(Refresh)"></AppBarButton>
+
+                <AppBarButton Icon="Add" Command="{Binding AddSceneCommand}" ToolTipService.ToolTip="增加(Add)"></AppBarButton>
+                <AppBarButton Icon="Remove" Command="{Binding RemoveCurrentSceneCommand}" ToolTipService.ToolTip="删除(Remove)"></AppBarButton>
+        </CommandBar>
+            
+        </StackPanel>
+        <Canvas Grid.Row="1" >
+        <Canvas Name="targetCanvas" Background="LightGreen"  Width="{Binding ViewWidth}"></Canvas>
+        </Canvas>
+        <Frame Grid.Row="2" IsEnabled="{Binding SceneIsEnable}">
+            <localview:SceneView DataContext="{Binding CurrentScene}"></localview:SceneView>
+        </Frame>
+    </Grid>
+</UserControl>

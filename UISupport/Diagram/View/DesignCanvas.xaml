@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="DesignTool.Lib.View.DesignCanvas"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="using:DesignTool.Lib.View"
+             mc:Ignorable="d" DataContextChanged="DesignCanvas_OnDataContextChanged"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalScrollMode="Auto" VerticalScrollMode="Auto">
+    <Canvas Name="TargetDesignCanvas" Background="LightGoldenrodYellow" Width="{Binding Width,Mode=TwoWay}" Height="{Binding Height,Mode=TwoWay}"
+            KeyUp="TargetDesignCanvas_KeyUp" RightTapped="TargetDesignCanvas_RightTapped" 
+            AllowDrop="True" DragOver="TargetDesignCanvas_DragOver" Drop="TargetDesignCanvas_Drop">
+        <!--<Canvas.ContextFlyout >
+            <Flyout Placement="Full"  >
+                <ListBox Name="createControlMenu" ItemsSource="{Binding MenuList}" Visibility="{Binding UseCreateMenuList}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <MenuFlyoutItem Command="{Binding Command}" Text="{Binding Title}"></MenuFlyoutItem>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Flyout>
+        </Canvas.ContextFlyout>-->
+        <!--<Canvas.ContextMenu>
+            <ContextMenu>
+
+                <MenuItem Click="SaveMenu_OnClick" Header="Save"></MenuItem>
+                <MenuItem Click="LoadMenu_OnClick" Header="Load"></MenuItem>
+
+            </ContextMenu>
+        </Canvas.ContextMenu>-->
+
+    </Canvas>
+    </ScrollViewer>
+</UserControl>

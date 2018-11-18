@@ -1,0 +1,208 @@
+﻿<ContentDialog
+    x:Class="StoryDesign.View.Control.CreateRelationDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StoryDesign.View.Control"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerik="using:Telerik.UI.Xaml.Controls.Input"
+    mc:Ignorable="d"
+    Title="Create Relation"
+    PrimaryButtonText="创建(Create Relation)"
+    SecondaryButtonText="取消(Cancel)"
+    Height="622" Width="2000"
+    Opened="ContentDialog_Opened"
+    FullSizeDesired="True"
+>
+
+    <Grid Margin="0" Width="500">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="155"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="155"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="0,5" Background="LightBlue" Orientation="Horizontal" HorizontalAlignment="Stretch" >
+            <ComboBox Margin="0,3" SelectedIndex="0" Width="70" SelectionChanged="ComboBox_SourceSelectionChanged">
+                <StackPanel Orientation="Horizontal" >
+                    <SymbolIcon Symbol="AllApps" />
+                    <TextBlock Margin="5">全部(All Entity)</TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <SymbolIcon Symbol="Contact"/>
+                    <TextBlock Margin="5">角色(Actor)</TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" >
+                    <SymbolIcon Symbol="Repair" />
+                    <TextBlock Margin="5">物品(Stuff)</TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" >
+                    <SymbolIcon Symbol="People" />
+                    <TextBlock Margin="5">组织(Group)</TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Symbol="Important"/>
+                    <TextBlock Margin="5">事件(Event)</TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Symbol="Calendar"/>
+                    <TextBlock Margin="5">任务(Task)</TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Symbol="Street" />
+                    <TextBlock Margin="5">地点(Location)</TextBlock>
+                </StackPanel>
+
+            </ComboBox>
+            <TextBox Margin="1,3" Name="sourceFilterTextbox" TextChanged="sourceFilterTextbox_TextChanged" AcceptsReturn="True"
+                     MinWidth="80" ToolTipService.ToolTip="Source Entity Filter"></TextBox>
+        </StackPanel>
+
+        <StackPanel Margin="0,5" Grid.Column="2" Background="LightBlue" Orientation="Horizontal" 
+                    HorizontalAlignment="Stretch" >
+            <ComboBox Margin="0,3" SelectedIndex="0" Width="70" SelectionChanged="ComboBox_TargetSelectionChanged">
+                <StackPanel Orientation="Horizontal" >
+                    <SymbolIcon Symbol="AllApps" />
+                    <TextBlock Margin="5">全部(All Entity)</TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <SymbolIcon Symbol="Contact"/>
+                    <TextBlock Margin="5">角色(Actor)</TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" >
+                    <SymbolIcon Symbol="Repair" />
+                    <TextBlock Margin="5">物品(Stuff)</TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" >
+                    <SymbolIcon Symbol="People" />
+                    <TextBlock Margin="5">组织(Group)</TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Symbol="Important"/>
+                    <TextBlock Margin="5">事件(Event)</TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Symbol="Calendar"/>
+                    <TextBlock Margin="5">任务(Task)</TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Symbol="Street" />
+                    <TextBlock Margin="5">地点(Location)</TextBlock>
+                </StackPanel>
+
+            </ComboBox>
+            <TextBox Margin="1,3" Name="targetFilterTextbox" TextChanged="targetFilterTextbox_TextChanged" AcceptsReturn="True"
+                     MinWidth="80" ToolTipService.ToolTip="Target Entity Filter"></TextBox>
+        </StackPanel>
+
+        <ListBox Name="sourceEntityList" Grid.Row="1" ItemsSource="{Binding ShowSourceEntityList}" SelectionMode="Single"
+                 Background="LightBlue" SelectedItem="{Binding CurrentSourceEntity,Mode=TwoWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel ToolTipService.ToolTip="{Binding Memo}"  Orientation="Horizontal"
+                                HorizontalAlignment="Stretch">
+
+                        <Image Margin="5" Width="35" Height="35" Source="{Binding IconImage}" VerticalAlignment="Center"></Image>
+                        <TextBlock  Text="{Binding Name}" Margin="5" VerticalAlignment="Center" ></TextBlock>
+                    </StackPanel>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox Name="targetEntityList" Grid.Row="1" Grid.Column="2" ItemsSource="{Binding ShowSourceEntityList}" 
+                 SelectionMode="Single" SelectedItem="{Binding CurrentTargetEntity,Mode=TwoWay}"
+                 Background="LightGreen">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel ToolTipService.ToolTip="{Binding Memo}"  Orientation="Horizontal"
+                                HorizontalAlignment="Stretch">
+
+                        <Image Margin="5" Width="35" Height="35" Source="{Binding IconImage}" VerticalAlignment="Center"></Image>
+                        <TextBlock  Text="{Binding Name}" Margin="5" VerticalAlignment="Center" ></TextBlock>
+                    </StackPanel>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Grid Grid.Column="1" Grid.Row="1" Margin="0,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition />
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="55"/>
+                <ColumnDefinition />
+
+            </Grid.ColumnDefinitions>
+            <TextBlock Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" ToolTipService.ToolTip="relation type">类型:</TextBlock>
+            <ComboBox Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1"
+                  ItemsSource="{Binding ShowRelationTypeList}" SelectedItem="{Binding CurrentRelationType,Mode=TwoWay}" Grid.ColumnSpan="2"></ComboBox>
+
+            <TextBlock Grid.Row="1" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" ToolTipService.ToolTip="relation memo">说明:</TextBlock>
+            <TextBox Grid.Row="1" BorderThickness="0" Margin="2" Grid.Column="1" Text="{Binding Memo,Mode=TwoWay}" AcceptsReturn="True"
+                TextWrapping="Wrap" Grid.ColumnSpan="2" VerticalAlignment="Stretch"></TextBox>
+            <TextBlock Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" ToolTipService.ToolTip="relation begin time">开始:</TextBlock>
+            <StackPanel Grid.Column="1" Grid.Row="2" Margin="2">
+                <telerik:RadDatePicker VerticalAlignment="Center" Margin="0,5,0,1" Value="{Binding BeginTime,Mode=TwoWay}"></telerik:RadDatePicker>
+                <telerik:RadTimePicker VerticalAlignment="Center" Margin="0,1,0,5" Value="{Binding BeginTime,Mode=TwoWay}"></telerik:RadTimePicker>
+
+            </StackPanel>
+            <TextBlock Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" ToolTipService.ToolTip="relation end time">结束:</TextBlock>
+            <StackPanel Grid.Column="1" Grid.Row="3" Margin="2">
+                <telerik:RadDatePicker VerticalAlignment="Center" Margin="0,5,0,1" Value="{Binding EndTime,Mode=TwoWay}"></telerik:RadDatePicker>
+                <telerik:RadTimePicker VerticalAlignment="Center" Margin="0,1,0,5" Value="{Binding EndTime,Mode=TwoWay}"></telerik:RadTimePicker>
+
+            </StackPanel>
+            <Button Grid.Row="4" Grid.ColumnSpan="2" Margin="5" Command="{Binding CreateRelationCommand}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    ToolTipService.ToolTip="add relation to waiting to create pool">添加待创建关联</Button>
+        </Grid>
+        <ListBox Grid.Row="2" Grid.ColumnSpan="3" ItemsSource="{Binding CreatedRelationList}" >
+            <ListBox.Resources>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListBox.Resources>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="5" BorderThickness="3" BorderBrush="BlueViolet" ToolTipService.ToolTip="{Binding Memo}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition ></ColumnDefinition>
+                            <ColumnDefinition Width="70"></ColumnDefinition>
+                            <ColumnDefinition ></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <AppBarButton Grid.RowSpan="2" Margin="1" Icon="Remove" Click="AppBarButton_Click"></AppBarButton>
+                        <TextBlock Grid.Column="1" Text="{Binding SourceName}"></TextBlock>
+                        <TextBlock Grid.Column="2" Text="{Binding RelationType}"></TextBlock>
+                        <TextBlock Grid.Column="3" Text="{Binding TargetName}"></TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding BeginTime}"></TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="-"></TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding EndTime}"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</ContentDialog>

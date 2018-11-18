@@ -1,0 +1,73 @@
+﻿<UserControl
+    x:Class="StoryDesign.View.ListView.StoryListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StoryDesign.View.ListView"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="700"
+    d:DesignWidth="400">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="50*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <AppBarButton Icon="Page" Command="{Binding NewStoryCommand}" ToolTipService.ToolTip="New" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+        </AppBarButton>
+        <Button Grid.Column="1" Margin="15" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                Command="{Binding NewStoryCommand}" Background="Transparent">
+            <TextBlock Width="230">新建故事 (Create New Story)      </TextBlock>
+        </Button>
+        <AppBarButton Icon="OpenFile" Grid.Row="1" Command="{Binding OpenStoryCommand}" ToolTipService.ToolTip="Open"
+                      HorizontalAlignment="Center" VerticalAlignment="Center">
+
+        </AppBarButton>
+        <Button Grid.Row="1" Grid.Column="1" Margin="15" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                Command="{Binding OpenStoryCommand}" Background="Transparent">
+            <TextBlock Width="230">打开故事 (Open Story)</TextBlock>
+        </Button>
+
+        <AppBarButton Grid.Row="2" Icon="Save" Command="{Binding SaveStoryCommand}" ToolTipService.ToolTip="Save"
+                      HorizontalAlignment="Center" VerticalAlignment="Center">
+
+        </AppBarButton>
+        <Button Grid.Row="2" Grid.Column="1" Margin="15" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                Command="{Binding SaveStoryCommand}" Background="Transparent">
+            <TextBlock Width="230">保存当前故事(Save Current Story)</TextBlock>
+        </Button>
+        <AppBarButton Grid.Row="3" Icon="SaveLocal" Command="{Binding SaveStoryAsCommand}"
+                      HorizontalAlignment="Center" VerticalAlignment="Center" ToolTipService.ToolTip="Save as">
+
+        </AppBarButton>
+        <Button Grid.Row="3" Grid.Column="1" Margin="15" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                Command="{Binding SaveStoryAsCommand}" Background="Transparent">
+            <TextBlock Width="230">故事另存为 (Save Story As)</TextBlock>
+        </Button>
+        <AppBarButton Grid.Row="4" Icon="Mail" Command="{Binding OpenLogCommand}" ToolTipService.ToolTip="Log"
+                      HorizontalAlignment="Center" VerticalAlignment="Center">
+
+        </AppBarButton>
+        <Button Grid.Row="4" Grid.Column="1" Margin="15" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                Command="{Binding OpenLogCommand}" Background="Transparent">
+            <TextBlock Width="230">查看日志信息 (View Edit Log)</TextBlock>
+        </Button>
+        <AppBarButton Grid.Row="5" Icon="Cancel" Command="{Binding ExitCommand}" ToolTipService.ToolTip="Exit"
+                      HorizontalAlignment="Center" VerticalAlignment="Center">
+        </AppBarButton>
+        <Button Grid.Row="5" Grid.Column="1" Margin="15"
+                Command="{Binding ExitCommand}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent">
+            <TextBlock Width="230">退出 (Exit Story Design)</TextBlock>
+        </Button>
+    </Grid>
+</UserControl>

@@ -1,0 +1,77 @@
+﻿<ContentDialog
+    x:Class="StoryDesign.View.Control.SelectEntityDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StoryDesign.View.Control"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="选择故事对象(Select Story Entity)"
+    SecondaryButtonText="取消(Cancel)"
+    PrimaryButtonText="确定(OK)"
+    Opened="ContentDialog_Opened"
+    >
+
+    <Grid Margin="0" Height="370" Width="500">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="38"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.RowSpan="2"  BorderBrush="LightBlue" BorderThickness="3">
+            <Button Margin="3" Command="{Binding ShowAllCommand}" HorizontalAlignment="Center" ToolTipService.ToolTip="全部(All)">
+                <SymbolIcon Symbol="AllApps" />
+            </Button>
+            <Button Margin="3" Command="{Binding ShowActorCommand}" HorizontalAlignment="Center" ToolTipService.ToolTip="角色(Actor)">
+                <SymbolIcon Symbol="Contact" />
+            </Button>
+            <Button Margin="3" Command="{Binding ShowStuffCommand}" HorizontalAlignment="Center" ToolTipService.ToolTip="物品(Stuff)">
+                <SymbolIcon Symbol="Repair" />
+            </Button>
+            <Button Margin="3" Command="{Binding ShowGroupCommand}" HorizontalAlignment="Center" ToolTipService.ToolTip="组织(Group)">
+                <SymbolIcon Symbol="People" />
+            </Button>
+            <Button Margin="3" Command="{Binding ShowEventCommand}" HorizontalAlignment="Center" ToolTipService.ToolTip="事件(Event)">
+                <SymbolIcon Symbol="Important" />
+            </Button>
+            <Button Margin="3" Command="{Binding ShowTaskCommand}" HorizontalAlignment="Center" ToolTipService.ToolTip="任务(Task)">
+                <SymbolIcon Symbol="Calendar" />
+            </Button>
+            <Button Margin="3" Command="{Binding ShowLocationCommand}" HorizontalAlignment="Center" ToolTipService.ToolTip="地点(Location)">
+                <SymbolIcon Symbol="Street" />
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Background="LightBlue" Orientation="Horizontal" HorizontalAlignment="Stretch" >
+            <TextBox Margin="5,3" Name="filterTextbox" TextChanged="filterTextbox_TextChanged" MinWidth="180" ToolTipService.ToolTip="名称过滤(Filter)" AcceptsReturn="True"></TextBox>
+            <Button Margin="5,3" Command="{Binding ClearSelectCommand}">Clear All Select</Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="2" Background="LightGray">
+            <TextBlock Margin="5">已选数量(Selected Num):</TextBlock>
+            <TextBlock Margin="5" Text="{Binding SelectedNo}"></TextBlock>
+            <AppBarSeparator Margin="5"></AppBarSeparator>
+            <TextBlock Margin="5">全部数量(Total Num):</TextBlock>
+            <TextBlock Margin="5" Text="{Binding TotalNo}"></TextBlock>
+            
+        </StackPanel>
+        <ListBox Name="entityList" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding ShowEntityList}" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel ToolTipService.ToolTip="{Binding Memo}"  Orientation="Horizontal"
+                                HorizontalAlignment="Stretch">
+
+                        <CheckBox Margin="5" Width="35" Height="35" IsChecked="{Binding IsSelected,Mode=TwoWay}"
+                                 Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" VerticalAlignment="Center"></CheckBox>
+                        <Image Margin="5" Width="35" Height="35" Source="{Binding IconImage}" VerticalAlignment="Center"></Image>
+                        <TextBlock  Text="{Binding Name}" Margin="5" VerticalAlignment="Center" Tapped="Grid_Tapped"></TextBlock>
+                    </StackPanel>
+                    
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</ContentDialog>

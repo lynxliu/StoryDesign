@@ -1,0 +1,34 @@
+﻿<UserControl
+    x:Class="StoryDesign.View.IconControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StoryDesign.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:designSupport="using:DesignTool.Lib"
+    mc:Ignorable="d"
+    d:DesignHeight="200"
+    d:DesignWidth="150">
+    <UserControl.Resources>
+        <designSupport:ConvertColorToBrush x:Key="convertColorToBrush" />
+        <designSupport:ConvertDoubleToBorderThickness x:Key="convertDoubleToBorderThickness" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="147*"/>
+            <RowDefinition Height="55"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <Button HorizontalAlignment="Right" Width="37" Height="37" VerticalAlignment="Top" Click="Button_ClickAsync">
+            <SymbolIcon Symbol="Pictures" ></SymbolIcon>
+        </Button>
+        <Image  Source="{Binding IconImage}">
+
+            
+        </Image>
+
+        <TextBlock Grid.Row="1" Text="{Binding Name}"  Foreground="{Binding Background,Converter= {StaticResource convertColorToBrush}}"
+               HorizontalAlignment="Center" FontSize="{Binding FontSize}"  TextDecorations="Underline"></TextBlock>
+
+    </Grid>
+</UserControl>

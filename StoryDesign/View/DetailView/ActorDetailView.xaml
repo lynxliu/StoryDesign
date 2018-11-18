@@ -1,0 +1,135 @@
+﻿<UserControl
+    x:Class="StoryDesign.View.DetailView.ActorDetailView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StoryDesign.View.DetailView"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerik="using:Telerik.UI.Xaml.Controls.Input"
+    mc:Ignorable="d"
+    d:DesignHeight="550"
+    d:DesignWidth="350" DataContextChanged="UserControl_DataContextChanged">
+
+    <Grid>
+        <Button HorizontalAlignment="Right" VerticalAlignment="Top"
+                  Command="{Binding OpenFateDiagramCommand}" CommandParameter="{Binding ObjectID}">
+            <SymbolIcon ToolTipService.ToolTip="命运(Fate)" Symbol="Directions"></SymbolIcon>
+        </Button>
+        <Pivot >
+            <PivotItem  >
+                <PivotItem.Header>
+                    <PivotHeaderItem FontSize="18">
+                        基本(Info)
+                    </PivotHeaderItem>
+                </PivotItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+
+                        <RowDefinition Height="200*"/>
+                        <RowDefinition Height="100*"/>
+                    </Grid.RowDefinitions>
+
+                    <GridView Grid.Row="1" Margin="5" Name="resourcePanel" BorderBrush="LightBlue" BorderThickness="2" >
+
+                    </GridView>
+                    <Button Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top">
+                        <SymbolIcon Symbol="More"></SymbolIcon>
+                        <Button.Flyout>
+                            <MenuFlyout >
+                                <MenuFlyoutItem Text="添加资源(Add Resource)" Command="{Binding AddResourceCommand}">
+
+                                </MenuFlyoutItem>
+                                <MenuFlyoutItem Text="粘贴资源(Paste Resource)" Command="{Binding PasteResourceCommand}">
+
+                                </MenuFlyoutItem>
+                            </MenuFlyout>
+                        </Button.Flyout>
+                    </Button>
+
+                    <local:EntityBaseControl></local:EntityBaseControl>
+                </Grid>
+            </PivotItem>
+            <PivotItem >
+                <PivotItem.Header>
+                <PivotHeaderItem FontSize="18">
+                    更多(Ext)
+                </PivotHeaderItem>
+                </PivotItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock VerticalAlignment="Center">性别(Gendar):</TextBlock>
+                    <ToggleSwitch Margin="3" Grid.Column="1" VerticalAlignment="Center" OffContent="Femail" OnContent="Male" IsOn="{Binding IsMale,Mode=TwoWay}" ></ToggleSwitch>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">国籍(Nation):</TextBlock>
+                    <TextBox BorderThickness="0" Margin="3" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"
+                             Text="{Binding Nation,Mode=TwoWay}" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">种族(Race):</TextBlock>
+                    <TextBox BorderThickness="0" Margin="3" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"
+                             Text="{Binding Race,Mode=TwoWay}" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">外貌(Appearence):</TextBlock>
+                    <TextBox BorderThickness="0" Margin="3" Grid.Row="3" Grid.Column="1" VerticalAlignment="Stretch" 
+                             Text="{Binding Appearence,Mode=TwoWay}" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
+
+                    <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center">角色(Character):</TextBlock>
+                    <TextBox BorderThickness="0" Margin="3" Grid.Row="4" Grid.Column="1" VerticalAlignment="Stretch" 
+                             Text="{Binding Character,Mode=TwoWay}" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
+
+                    <Button Grid.Row="5" VerticalAlignment="Center" Margin="5" Command="{Binding RefreshRelativeActorListCommand}">Relative Actor:</Button>
+                    <ListBox Grid.Row="5" Grid.Column="1" Margin="5" ItemsSource="{Binding RelativeActorList}">
+                        <ListBox.Resources>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListBox.Resources>
+                    </ListBox>
+                </Grid>
+
+            </PivotItem>
+            <PivotItem >
+                <PivotItem.Header>
+                    <PivotHeaderItem FontSize="18">
+                        注释(Note)
+                    </PivotHeaderItem>
+                </PivotItem.Header>
+                <ListBox ItemsSource="{Binding NoteList}" SelectedItem="{Binding CurrentNote,Mode=TwoWay}"
+                        BorderBrush="Yellow" BorderThickness="3" RightTapped="ListBox_RightTapped" IsRightTapEnabled="True"
+                             HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <ListBox.Resources>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListBox.Resources>
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid MinHeight="150" HorizontalAlignment="Stretch" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="35"></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock ToolTipService.ToolTip="修改时间(Last Modified Time)" Text="{Binding LastModifyTime}"></TextBlock>
+                                <TextBox Grid.Row="1" Text="{Binding Description,Mode=TwoWay}" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
+
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                </PivotItem>
+        </Pivot>
+
+    </Grid>
+</UserControl>

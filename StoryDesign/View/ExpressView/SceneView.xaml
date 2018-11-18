@@ -1,0 +1,99 @@
+﻿<UserControl
+    x:Class="StoryDesign.View.ExpressView.SceneView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StoryDesign.View.ExpressView"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerik="using:Telerik.UI.Xaml.Controls.Input"
+    mc:Ignorable="d"
+    d:DesignHeight="500"
+    d:DesignWidth="600" AllowDrop="True" Drop="UserControl_Drop" >
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MaxWidth="588" Width="375"></ColumnDefinition>
+            <ColumnDefinition Width="247*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="253*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Width="136">
+
+            <AppBarButton HorizontalAlignment="Right" Icon="Add" Command="{Binding AddExpressObjectCommand}"></AppBarButton>
+            <AppBarButton HorizontalAlignment="Right" Icon="Remove" Command="{Binding RemoveExpressObjectCommand}"></AppBarButton>
+        </StackPanel>
+        <Grid Grid.RowSpan="2"  BorderBrush="LightBlue" BorderThickness="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="38"/>
+                <RowDefinition Height="38"/>
+                <RowDefinition Height="38"/>
+                <RowDefinition Height="38"/>
+                <RowDefinition Height="38"/>
+                <RowDefinition Height="38"/>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock >情绪类型(Mood Type):</TextBlock>
+            <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" ItemsSource="{Binding AllMoodList}"
+                       SelectedItem="{Binding MainMoodType,Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"></TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock Grid.Row="1" Margin="5">情绪强度(Mood Rank):</TextBlock>
+            <telerik:RadNumericBox Grid.Row="1" Margin="1" Value="{Binding MainMoodRank,Mode=TwoWay}" 
+                                  Maximum="1" Minimum="0" Grid.Column="1" ></telerik:RadNumericBox>
+
+            <TextBlock Grid.Row="2" Margin="5">完成比例(FinishedPercent):</TextBlock>
+            <telerik:RadNumericBox Grid.Row="2" Margin="1" Value="{Binding FinishedPercent,Mode=TwoWay}" 
+                                  Maximum="1" Minimum="0" Grid.Column="1" ></telerik:RadNumericBox>
+            <TextBlock Grid.Row="3"  Margin="5" >节奏(Rhythm):</TextBlock>
+            <telerik:RadNumericBox Grid.Row="3" Value="{Binding Rhythm,Mode=TwoWay}" Maximum="100" 
+                                  Minimum="0" Grid.Column="1" Margin="1" ></telerik:RadNumericBox>
+            <TextBlock Grid.Row="4" Margin="5" >起始秒数(Start Second):</TextBlock>
+            <telerik:RadNumericBox Grid.Row="4" Grid.Column="1" Value="{Binding StartSecond,Mode=TwoWay}" 
+                                  Margin="1"></telerik:RadNumericBox>
+            <TextBlock Grid.Row="5"  Margin="5" >持续秒数(Continue):</TextBlock>
+            <telerik:RadNumericBox Grid.Row="5" Grid.Column="1" Value="{Binding SpendSecond,Mode=TwoWay}" 
+                                  Height="28" Margin="1" ></telerik:RadNumericBox>
+            <TextBlock Margin="5" Grid.Row="6">描述(Description):</TextBlock>
+            <TextBox Margin="3" Grid.Row="6" Grid.Column="1" Text="{Binding Description,Mode=TwoWay}"
+                     AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
+        </Grid>
+        <ListBox Grid.Row="1" Grid.Column="1" Background="LightGray"
+                     ItemsSource="{Binding ExpressObjectList}" 
+                     SelectedItem="{Binding CurrentExpressObject,Mode=TwoWay}" IsRightTapEnabled="False"
+                 RightTapped="ListBox_RightTapped">
+            <ListBox.Resources>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListBox.Resources>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"></RowDefinition>
+                            <RowDefinition Height="75"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="35"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Margin="3" Width="35" Height="35" Source="{Binding IconImage}" VerticalAlignment="Center"></Image>
+                        <TextBlock Margin="3" HorizontalAlignment="Stretch" Text="{Binding Name}" ToolTipService.ToolTip="{Binding Memo}"></TextBlock>
+                        <TextBox Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding Description,Mode=TwoWay}" Margin="3" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </Grid>
+</UserControl>

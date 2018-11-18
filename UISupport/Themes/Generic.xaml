@@ -1,0 +1,142 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UISupport.Diagram.Controls"
+    xmlns:lib="using:DesignTool.Lib"
+    >
+    
+    <Style TargetType="local:ArrowLine">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ArrowLine">
+                    <Canvas x:Name="RootElement" >
+                        <Path Stroke="{TemplateBinding Background}" StrokeDashArray="{TemplateBinding StrokeDashArray}" StrokeThickness="{TemplateBinding StrokeThickness}">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure x:Name="LinePathFigureElement" >
+                                        <LineSegment x:Name="LineElement"></LineSegment>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+                        <TextBox x:Name="TextElement" TextAlignment="Center" Background="Transparent" Text="{Binding Text,Mode=TwoWay}" BorderThickness="0" IsReadOnly="False" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBox>
+                        <Path Stroke="{TemplateBinding Background}"  Visibility="{TemplateBinding ArrowVisibility}" StrokeThickness="{TemplateBinding ArrowLineThickness}">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure x:Name="ArrowStartElement" >
+                                        <PolyLineSegment x:Name="ArrowElement" ></PolyLineSegment>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="local:SimpleArrow">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:SimpleArrow">
+                    <Canvas x:Name="RootElement">
+                        <Path Stroke="{TemplateBinding Background}" StrokeDashArray="{TemplateBinding StrokeDashArray}" StrokeThickness="{TemplateBinding StrokeThickness}">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure x:Name="LinePathFigureElement" >
+                                        <LineSegment x:Name="LineElement"></LineSegment>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+                        <Path Stroke="{TemplateBinding Background}"  Visibility="{TemplateBinding ArrowVisibility}" StrokeThickness="{TemplateBinding ArrowLineThickness}">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure x:Name="ArrowStartElement" >
+                                        <PolyLineSegment x:Name="ArrowElement" ></PolyLineSegment>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--ArrowArcSegment-->
+    <Style TargetType="local:ArrowArcSegment">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ArrowArcSegment">
+                    <Canvas x:Name="RootElement">
+                        <Path Stroke="{TemplateBinding Background}" StrokeDashArray="{TemplateBinding StrokeDashArray}" StrokeThickness="{TemplateBinding StrokeThickness}">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure x:Name="LinePathFigureElement"  >
+                                        <ArcSegment x:Name="LineElement"></ArcSegment>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+                        <Path Stroke="{TemplateBinding Background}" StrokeThickness="{TemplateBinding LineThickness}" Visibility="{TemplateBinding ArrowVisibility}">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure x:Name="ArrowStartElement" >
+                                        <PolyLineSegment x:Name="ArrowElement" ></PolyLineSegment>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+                        <Grid Name="CenterGridElement">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Canvas Grid.Column="0" Grid.Row="0" Name="ContentPresenterCanvasElement" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <ContentPresenter Name="ContentPresenterElement"></ContentPresenter>
+                            </Canvas>
+                        </Grid>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="local:ArrowCurveSegment">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ArrowCurveSegment">
+                    <Canvas x:Name="RootElement">
+                        <Path Stroke="{TemplateBinding Background}" StrokeDashArray="{TemplateBinding StrokeDashArray}" StrokeThickness="{TemplateBinding StrokeThickness}">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure x:Name="LinePathFigureElement"  >
+                                        <QuadraticBezierSegment x:Name="LineElement"></QuadraticBezierSegment>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+                        <TextBox x:Name="TextElement" TextAlignment="Center" Background="Transparent" Text="{Binding Text,Mode=TwoWay}" BorderThickness="0" IsReadOnly="False" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBox>
+
+                        <Path Stroke="{TemplateBinding Background}" StrokeThickness="{TemplateBinding LineThickness}" Visibility="{TemplateBinding ArrowVisibility}">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure x:Name="ArrowStartElement" >
+                                        <PolyLineSegment x:Name="ArrowElement" ></PolyLineSegment>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <lib:ConvertValidToBorderThickness x:Key="convertValidToBorderThickness" />
+    <lib:ConvertValidToBorder x:Key="convertValidToBorder" />
+</ResourceDictionary>

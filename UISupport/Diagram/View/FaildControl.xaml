@@ -1,0 +1,25 @@
+﻿<UserControl
+    x:Class="UISupport.Diagram.View.FaildControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UISupport.Diagram.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="13*"/>
+            <RowDefinition Height="87*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="69*"/>
+            <ColumnDefinition Width="31*"/>
+        </Grid.ColumnDefinitions>
+        <Image Grid.RowSpan="2" Source="ms-appx:///Diagram/Images/Square150x150Logo.png"></Image>
+        <TextBlock Grid.Column="1" Text="{Binding TargetObjectID}" Foreground="Red"></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Margin="5" Foreground="Red">Faild to load info, can not find target object</TextBlock>
+    </Grid>
+</UserControl>

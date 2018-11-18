@@ -1,0 +1,45 @@
+﻿<UserControl
+    x:Class="StoryDesign.View.ListView.GroupListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StoryDesign.View.ListView"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBox Text="{Binding GroupFilter,Mode=TwoWay}" Margin="5" MinWidth="100"/>
+            <CommandBar   >
+                <AppBarButton Command="{Binding AddGroupCommand}" Icon="Add">增加(Add)</AppBarButton>
+                <AppBarButton Command="{Binding OpenGroupCommand}" Icon="Edit" >编辑(Edit)</AppBarButton>
+                <AppBarButton Command="{Binding RemoveGroupCommand}" Icon="Remove">删除(Remove)</AppBarButton>
+                <AppBarSeparator></AppBarSeparator>
+                <AppBarButton Command="{Binding OpenGroupFateCommand}" Icon="Directions">命运(Fate)</AppBarButton>
+            </CommandBar>
+        </StackPanel>
+        <ListBox Grid.Row="1" ItemsSource="{Binding ShowGroupList}" SelectedItem="{Binding CurrentGroup,Mode=TwoWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Height="35" Margin="3" IsDoubleTapEnabled="True" DoubleTapped="StackPanel_DoubleTapped">
+                        <Image >
+                            <Image.Source>
+                                <BitmapImage UriSource="{Binding Icon}" />
+                            </Image.Source>
+                        </Image>
+                        <TextBlock VerticalAlignment="Center" Text="{Binding AbstractInfo}" RightTapped="TextBlock_RightTapped"
+                                    Margin="10,3" CanDrag="True" DragStarting="TextBlock_DragStarting"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>
